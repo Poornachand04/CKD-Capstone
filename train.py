@@ -5,8 +5,8 @@ from torch.utils.data import DataLoader  # Loads data in batches
 from tqdm import tqdm  # Progress bar
 
 # ==================== CONFIGURATION ====================
-DATASET = r'D:\Poorna\ckd - Copy\data\dataset_B\Kidney_Stone_Dataset'  # Dataset path
-BATCH_SIZE = 32   # Number of images processed at once
+DATASET = r'D:\Poorna\CKD-Capstone\data\dataset_B\Kidney_Stone_Dataset' # Dataset 
+BATCH_SIZE = 32     # Number of samples per batch
 EPOCHS = 10       # Number of times model sees full dataset
 LR = 0.001        # Learning rate (step size for learning)
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'  # Use GPU if available
@@ -93,7 +93,8 @@ def train_model(model, name):
         # Save best model
         if val_acc > best_acc:
             best_acc = val_acc
-            torch.save(model.state_dict(), f"{name}_best.pth")
+            SAVE_DIR = r"D:\Poorna\CKD-Capstone"
+            torch.save(model.state_dict(), f"{SAVE_DIR}\\{name}_best.pth")
             print("✅ Model Saved!")
 
 # ==================== MODEL 1: RESNET50 ====================

@@ -8,7 +8,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # ================= CONFIG =================
-DATASET = r'D:\Poorna\ckd - Copy\data\dataset_B\Kidney_Stone_Dataset'
+DATASET = r'D:\Poorna\CKD-Capstone\data\dataset_B\Kidney_Stone_Dataset'
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # Preprocessing
@@ -31,14 +31,26 @@ def load_model(model, path):
     model.eval()  # Evaluation mode
     return model
 
-# Load models
+# ================= MODEL PATH =================
+MODEL_PATH = r"D:\Poorna\CKD-Capstone"
+
+# ================= LOAD RESNET =================
 resnet = models.resnet50()
 resnet.fc = nn.Linear(resnet.fc.in_features, 4)
-resnet = load_model(resnet, "resnet50_best.pth")
 
+resnet_path = f"{MODEL_PATH}\\resnet50_best.pth"
+print("Loading:", resnet_path)
+
+resnet = load_model(resnet, resnet_path)
+
+# ================= LOAD DENSENET =================
 densenet = models.densenet121()
 densenet.classifier = nn.Linear(densenet.classifier.in_features, 4)
-densenet = load_model(densenet, "densenet121_best.pth")
+
+densenet_path = f"{MODEL_PATH}\\densenet121_best.pth"
+print("Loading:", densenet_path)
+
+densenet = load_model(densenet, densenet_path)
 
 # ================= ENSEMBLE PREDICTION =================
 all_preds = []
