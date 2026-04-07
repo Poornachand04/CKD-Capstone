@@ -1,0 +1,4 @@
+Model,Accuracy (%)
+ResNet50,100.0
+DenseNet121,100.0
+Ensemble,100.0
